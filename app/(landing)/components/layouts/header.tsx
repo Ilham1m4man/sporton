@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -7,9 +7,9 @@ import { FiSearch, FiShoppingBag } from "react-icons/fi";
 import CartPopup from "../ui/cart-popup";
 
 export default function Header() {
-  const [isCartPopupOpen, setIsCartPopupOpen] = useState(false)
+  const [isCartPopupOpen, setIsCartPopupOpen] = useState(false);
   return (
-    <header>
+    <header className="flex sticky top-0 z-50 bg-primary-light/20 backdrop-blur-2xl justify-around items-center h-20">
       <div className="flex justify-between gap-10 container mx-auto py-7">
         <Link href="/">
           <Image
