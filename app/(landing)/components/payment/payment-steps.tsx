@@ -40,7 +40,7 @@ export default function PaymentSteps() {
       formData.append("customerAddress", customerInfo.customerAddress);
       formData.append("image", file);
       formData.append(
-        "purchasedItem",
+        "purchasedItems",
         JSON.stringify(
           items.map((item) => ({ productId: item._id, qty: item.qty }))
         )
