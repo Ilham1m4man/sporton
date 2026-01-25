@@ -136,7 +136,7 @@ export default function TransactionModal({
           <div className="flex justify-between  text-sm mt-6">
             <h4 className="font-semibold">Total </h4>
             <div className="text-primary font-semibold">
-              {priceFormatter(parseInt(transaction.totalPayment))}
+              {priceFormatter(transaction.totalPayment)}
             </div>
           </div>
           <div className=" flex justify-end gap-5 mt-12">

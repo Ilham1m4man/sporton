@@ -51,7 +51,7 @@ export default function TransactionTable({
               <td className="px-6 py-4 font-medium">{data.customerName}</td>
               <td className="px-6 py-4 font-medium">{data.customerContact}</td>
               <td className="px-6 py-4 font-medium">
-                {priceFormatter(parseInt(data.totalPayment))}
+                {priceFormatter(data.totalPayment)}
               </td>
 
               <td className="px-6 py-4 font-bold">
