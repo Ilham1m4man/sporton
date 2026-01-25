@@ -1,43 +1,42 @@
+import { getImageURL } from "@/app/lib/api";
+import { Category } from "@/app/types";
 import Image from "next/image";
 import { FiEdit2, FiTrash2 } from "react-icons/fi";
 
-const categoryData = [
-  {
-    name: "Running",
-    imageUrl: "/images/categories/category-running.png",
-    description: "lorem ipsum ",
-  },
-  {
-    name: "Football",
-    imageUrl: "/images/categories/category-football.png",
-    description: "lorem ipsum ",
-  },
-];
+type TCategoryTableProps = {
+  categories: Category[];
+  onEdit: (category: Category) => void;
+  onDelete: (id: string) => void;
+};
 
-export default function CategoryTable() {
+export default function CategoryTable({
+  categories,
+  onEdit,
+  onDelete,
+}: TCategoryTableProps) {
   return (
-    <div className="bg-white rounded-xl border border-gray-200">
+    <div className="bg-white rounded-xl border border-gray-100">
       <table className="w-full text-left border-collapse">
         <thead>
-          <tr className="border-b border-gray-200">
-            <th className="px-6 py-4 font-semibold">Category Name</th>
+          <tr className="border-b border-gray-100 text-sm">
+            <th className="px-6 py-4 font-semibold">Category</th>
             <th className="px-6 py-4 font-semibold">Description</th>
             <th className="px-6 py-4 font-semibold">Actions</th>
           </tr>
         </thead>
         <tbody>
-          {categoryData.map((data, index) => (
+          {categories.map((data, index) => (
             <tr
               key={index}
-              className="border-b border-gray-200 last:border-b-0"
+              className="border-b border-gray-50 last:border-none hover:bg-gray-50/50 text-sm"
             >
               <td className="px-6 py-4 font-medium">
-                <div className="flex gap-2 items-center">
-                  <div className="aspect-square bg-gray-100 rounded-md">
+                <div className="flex gap-4 items-center">
+                  <div className="aspect-square overflow-hidden bg-gray-100 rounded-md">
                     <Image
-                      src={data.imageUrl}
-                      width={52}
-                      height={52}
+                      src={getImageURL(data.imageUrl)}
+                      width={48}
+                      height={48}
                       alt={data.name}
                       className="aspect-square object-contain"
                     />
@@ -46,12 +45,18 @@ export default function CategoryTable() {
                 </div>
               </td>
               <td className="px-6 py-4 font-medium">{data.description}</td>
-              <td className="px-6 py-7.5 flex items-center gap-3 text-gray-600">
-                <button>
-                  <FiEdit2 size={20} />
+              <td className="px-6 py-7.5 flex items-center gap-3 text-gray-400">
+                <button
+                  onClick={() => onEdit?.(data)}
+                  className="cursor-pointer hover:text-primary"
+                >
+                  <FiEdit2 size={18} />
                 </button>
-                <button>
-                  <FiTrash2 size={20} />
+                <button
+                  onClick={() => onDelete?.(data._id)}
+                  className="cursor-pointer hover:text-primary"
+                >
+                  <FiTrash2 size={18} />
                 </button>
               </td>
             </tr>

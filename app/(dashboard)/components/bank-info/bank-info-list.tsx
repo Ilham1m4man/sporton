@@ -1,53 +1,62 @@
+import { Banks } from "@/app/types";
 import { FiCreditCard, FiEdit2, FiTrash2 } from "react-icons/fi";
 
-const bankData = [
-  {
-    bankName: "BCA",
-    accountNumber: "123123",
-    accountName: "PT SportOn Digital Indonesia",
-  },
-  {
-    bankName: "Mandiri",
-    accountNumber: "1212312313123",
-    accountName: "PT SportOn Digital Indonesia",
-  },
-  {
-    bankName: "BRI",
-    accountNumber: "1123123123",
-    accountName: "PT SportOn Digital Indonesia",
-  },
-];
+type TBankInfoListProps = {
+  banks: Banks[];
+  onEdit: (bank: Banks) => void;
+  onDelete: (id: string) => void;
+};
 
-export default function BankInfoList() {
+export default function BankInfoList({
+  banks,
+  onEdit,
+  onDelete,
+}: TBankInfoListProps) {
   return (
-    <div className="grid grid-cols-3 gap-8">
-      {bankData.map((data, index) => (
-        <div className="bg-white rounded-lg border border-gray-200" key={index}>
-          <div className="flex justify-between p-5">
-            <div className="flex gap-2 items-center">
-              <div className="bg-blue-50 text-blue-600 rounded w-12 h-12 flex justify-center items-center">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {banks.map((data) => (
+        <div
+          className="bg-white rounded-xl border border-gray-100 p-6 shadow-sm hover:shadow-md transition-shadow"
+          key={data._id}
+        >
+          <div className="flex justify-between items-start mb-6">
+            <div className="flex gap-4 items-center">
+              <div className="bg-blue-50 text-blue-600 rounded-xl w-12 h-12 flex justify-center items-center">
                 <FiCreditCard size={24} />
               </div>
               <div>
-                <div className="font-semibold">{data.bankName}</div>
-                <div className="text-xs opacity-50">Bank Transfer</div>
+                <div className="font-bold text-lg">{data.bankName}</div>
+                <div className="text-gray-400 text-sm">Bank Transfer</div>
               </div>
             </div>
-            <div className="flex gap-2 -mt-5 text-gray-600">
-              <button className="cursor-pointer">
-                <FiEdit2 size={20} />
+            <div className="flex items-center gap-3 text-gray-400">
+              <button
+                className="cursor-pointer hover:text-primary transition-colors"
+                onClick={() => onEdit(data)}
+              >
+                <FiEdit2 size={18} />
               </button>
-              <button className="cursor-pointer">
-                <FiTrash2 size={20} />
+              <button
+                className="cursor-pointer hover:text-red-500 transition-colors"
+                onClick={() => onDelete(data._id)}
+              >
+                <FiTrash2 size={18} />
               </button>
             </div>
           </div>
-          <div className="p-5 font-medium">
-            <div className="text-xs opacity-50">ACCOUNT NUMBER</div>
-            <div>{data.accountNumber}</div>
+          <div className="mb-4 font-medium">
+            <div className="text-xs text-gray-400 uppercase font-medium mb-1">
+              ACCOUNT NUMBER
+            </div>
+            <div className="text-dark font-bold text-lg">
+              {data.accountNumber}
+            </div>
           </div>
-          <div className="border-t border-gray-200 px-5 py-3 text-xs">
-            <span className="opacity-50">Holder :</span> PT SportsOn Digital
+          <div className="pt-4 border-t border-gray-50">
+            <p className="text-xs text-gray-400">
+              Holder :{" "}
+              <span className="font-medium text-dark">{data.accountName}</span>
+            </p>
           </div>
         </div>
       ))}

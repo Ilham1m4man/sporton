@@ -1,3 +1,19 @@
+import { JSX } from "react/jsx-runtime"
+
+export interface LoginCredential {
+  email: string
+  password: string
+}
+
+export interface LoginRes {
+  token: string
+  user: {
+    id: string
+    name: string
+    email: string
+  }
+}
+
 export interface Category {
   _id: string;
   name: string;
@@ -33,6 +49,7 @@ export interface Transaction {
   paymentProof: string;
   status: "pending" | "paid" | "rejected";
   purchasedItems: {
+    map(arg0: (item: any, index: any) => JSX.Element): import("react").ReactNode
     productId: Product;
     qty: number;
   };

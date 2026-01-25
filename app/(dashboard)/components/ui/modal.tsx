@@ -21,16 +21,16 @@ export default function Modal({
         onClick={onClose}
       ></div>
       <div className="relative bg-white rounded-xl w-full max-w-2xl ">
-        <div className="flex justify-between items-center px-7 py-3 border-b border-gray-200">
+        <div className="flex justify-between items-center p-6 border-b border-gray-100">
           <h3 className="font-semibold text-xl">{title}</h3>
           <button
             onClick={onClose}
-            className="p-4 rounded-full hover:bg-gray-100 cursor-pointer"
+            className="rounded-full text-gray-400 hover:text-gray-800 cursor-pointer"
           >
             <FiX size={24} />
           </button>
         </div>
-        <div className="p-7">{children}</div>
+        <div className="p-6">{children}</div>
       </div>
     </div>
   );

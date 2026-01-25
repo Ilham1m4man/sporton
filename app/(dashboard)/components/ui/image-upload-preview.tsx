@@ -29,24 +29,19 @@ export default function ImageUploadPreview({
   };
   return (
     <div className={className}>
+      <label htmlFor="imageInput" className="block text-sm font-medium text-dark mb-2">{label}</label>
       <div
         onClick={handleImageClick}
-        className="border-2 cursor-pointer border-dashed border-primary bg-primary/5 rounded-lg h-50 flex flex-col justify-center items-center"
+        className="border-2 border-dashed border-primary/30 text-primary rounded-xl bg-primary-light/20 h-48 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-primary-light/40 transition-colors overflow-hidden relative"
       >
         {value ? (
-          <div className="max-w-[190px] relative">
-            <Image
-              src={value}
-              alt="preview product"
-              className="w-full h-full object-cover"
-              width={190}
-              height={190}
-            />
-            <div className="opacity-0 hover:opacity-100 absolute top-0 left-0 flex z-50">
-              <FiEdit />
-              Change Image
-            </div>
-          </div>
+          <Image
+            src={value}
+            alt="preview product"
+            className="w-full h-full object-cover"
+            width={190}
+            height={190}
+          />
         ) : (
           <>
             <FiUploadCloud className="text-primary" size={24} />
@@ -54,6 +49,7 @@ export default function ImageUploadPreview({
           </>
         )}
         <input
+          id="imageInput"
           type="file"
           ref={fileInputRef}
           className="hidden"
