@@ -23,13 +23,17 @@ export default function ProductsSection({ products }: TProductsProps) {
             className="p-1.5 bg-white hover:drop-shadow-xl duration-300"
           >
             <div className="bg-primary-light aspect-square w-full flex justify-center items-center relative">
-              <Image
-                src={getImageURL(product.imageUrl)}
-                alt={product.name}
-                width={300}
-                height={300}
-                className="aspect-square object-contain"
-              />
+              {product.imageUrl ? (
+                <Image
+                  src={getImageURL(product.imageUrl)}
+                  alt={product.name}
+                  width={300}
+                  height={300}
+                  className="aspect-square object-contain"
+                />
+              ) : (
+                <div>No Image</div>
+              )}
               <Button className="w-10 h-10 p-2! absolute right-3 top-3 z-10">
                 <FiPlus size={24} />
               </Button>

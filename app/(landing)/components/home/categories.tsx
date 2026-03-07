@@ -5,8 +5,8 @@ import { Category } from "@/app/types";
 import { getImageURL } from "@/app/lib/api";
 
 type TCategoriesProps = {
-  categories: Category[]
-}
+  categories: Category[];
+};
 
 export default function CategoriesSection({ categories }: TCategoriesProps) {
   return (
@@ -25,13 +25,17 @@ export default function CategoriesSection({ categories }: TCategoriesProps) {
             key={category._id}
           >
             <div className="self-center">
-              <Image
-                src={getImageURL(category.imageUrl)}
-                width={86}
-                height={86}
-                alt={category.name}
-                className="mb-[10px]"
-              />
+              {category.imageUrl ? (
+                <Image
+                  src={getImageURL(category.imageUrl)}
+                  width={86}
+                  height={86}
+                  alt={category.name}
+                  className="mb-[10px]"
+                />
+              ) : (
+                <div>No Image</div>
+              )}
               <div className="text-primary font-medium text-xl text-center">
                 {category.name}
               </div>

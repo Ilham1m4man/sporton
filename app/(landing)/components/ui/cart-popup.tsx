@@ -12,7 +12,7 @@ export default function CartPopup() {
 
   const totalPrice = items.reduce(
     (total, item) => total + item.price * item.qty,
-    0
+    0,
   );
 
   const handleCheckout = () => {
@@ -28,13 +28,17 @@ export default function CartPopup() {
         items.map((item, index) => (
           <div className="border-b border-gray-200 p-4 flex gap-3" key={index}>
             <div className="bg-primary-light aspect-square w-16 flex justify-center items-center">
-              <Image
-                src={getImageURL(item.imageUrl)}
-                width={63}
-                height={63}
-                alt={item.name}
-                className="aspect-square object-contain"
-              />
+              {item.imageUrl ? (
+                <Image
+                  src={getImageURL(item.imageUrl)}
+                  width={63}
+                  height={63}
+                  alt={item.name}
+                  className="aspect-square object-contain"
+                />
+              ) : (
+                <div>No Image</div>
+              )}
             </div>
             <div className="self-center">
               <div className="text-sm font-medium">{item.name}</div>

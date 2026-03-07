@@ -14,13 +14,17 @@ export default async function ProductDetails({ params }: TPageProps) {
   return (
     <main className="container mx-auto py-40 flex gap-12">
       <div className="bg-primary-light aspect-square min-w-140 flex justify-center items-center">
-        <Image
-          src={getImageURL(product.imageUrl)}
-          width={550}
-          height={550}
-          alt={product.name}
-          className="aspect-square object-contain w-full"
-        />
+        {product.imageUrl ? (
+          <Image
+            src={getImageURL(product.imageUrl)}
+            width={550}
+            height={550}
+            alt={product.name}
+            className="aspect-square object-contain w-full"
+          />
+        ) : (
+          <div>No Image</div>
+        )}
       </div>
       <div className="w-full py-7">
         <h1 className="font-bold text-5xl mb-6">{product.name}</h1>
