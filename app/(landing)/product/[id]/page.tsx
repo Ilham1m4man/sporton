@@ -14,9 +14,9 @@ export default async function ProductDetails({ params }: TPageProps) {
   return (
     <main className="container mx-auto py-40 flex gap-12">
       <div className="bg-primary-light aspect-square min-w-140 flex justify-center items-center">
-        {product.imageUrl ? (
+        {product.image_url ? (
           <Image
-            src={getImageURL(product.imageUrl)}
+            src={getImageURL(product.image_url)}
             width={550}
             height={550}
             alt={product.name}
