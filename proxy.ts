@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const backendUrl = process.env.API_URL_INTERNAL;
 
   if (!backendUrl) {
