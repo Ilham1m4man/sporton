@@ -90,7 +90,7 @@ export default function TransactionModal({
           <h4 className="font-semibold text-sm mb-2">Items Purchased</h4>
 
           <div className="space-y-3">
-            {transaction.purchased_items.map((item, index) => (
+            {transaction.items.map((item, index) => (
               <div
                 key={index}
                 className="border border-gray-200 rounded-lg p-2 flex items-center gap-2"

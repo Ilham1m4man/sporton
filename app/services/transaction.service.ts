@@ -22,12 +22,12 @@ export async function getAllTransactions(): Promise<Transaction[]> {
 
 export async function updateTransaction(
   id: string,
-  data: FormData,
+  data: { status: string },
 ): Promise<Transaction> {
   return await fetchAPI<Transaction>(`/transactions/${id}`, {
     method: "PUT",
-    headers: { ...getAuthHeaders() },
-    body: data,
+    headers: { ...getAuthHeaders(), "Content-Type": "application/json" },
+    body: JSON.stringify(data),
   });
 }
 
