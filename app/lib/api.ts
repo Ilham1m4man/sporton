@@ -1,14 +1,23 @@
 export async function fetchAPI<T>(
   endpoint: string,
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<T> {
-  // Server-side pakai internal URL, client-side pakai public URL
-  const baseUrl =
-    typeof window === "undefined"
-      ? process.env.API_URL_INTERNAL || process.env.NEXT_PUBLIC_API_URL
-      : process.env.NEXT_PUBLIC_API_URL;
+  const isServer = typeof window === "undefined";
 
-  const res = await fetch(`${baseUrl}${endpoint}`, {
+  let url: string;
+
+  if (isServer) {
+    // Server Component / Server Action → langsung ke Internal ALB
+    // Lebih cepat, skip middleware, gak lewat ALB public
+    const baseUrl = process.env.API_URL_INTERNAL || "";
+    url = `${baseUrl}${endpoint}`;
+  } else {
+    // Browser → relative URL → middleware proxy ke Internal ALB
+    // Contoh: "/api/v1/users" (tanpa host)
+    url = endpoint;
+  }
+
+  const res = await fetch(url, {
     ...options,
     cache: options?.cache || "no-cache",
   });
@@ -19,30 +28,35 @@ export async function fetchAPI<T>(
       const errData = await res.json();
       errMsg = errData.message || errData.error || errMsg;
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
     throw new Error(errMsg);
   }
+
   return res.json();
 }
 
-// Karena udah pakai S3 presigned URL, harusnya selalu start with "http"
-// Tapi keep fallback just in case
 export function getImageURL(path: string) {
-  if (!path) return ""
-  if (path.startsWith("http")) return path;
-  
-  const baseUrl =
-    typeof window === "undefined"
-      ? process.env.API_URL_INTERNAL_ROOT || process.env.NEXT_PUBLIC_API_URL_ROOT
-      : process.env.NEXT_PUBLIC_API_URL_ROOT;
+  if (!path) return "";
+  if (path.startsWith("http")) return path; // S3 presigned URL
 
-  return `${baseUrl}/${path}`;
+  return path.startsWith("/") ? path : `/${path}`;
+
+/*   // Fallback: kalau path bukan full URL
+  const isServer = typeof window === "undefined";
+  if (isServer) {
+    const baseUrl = process.env.API_URL_INTERNAL_ROOT || "";
+    return `${baseUrl}/${path}`;
+  }
+
+  // Client: relative URL, middleware akan proxy
+  return `/${path}`; */
 }
 
-export function getAuthHeaders() {
+export function getAuthHeaders(): Record<string, string> {
+  if (typeof window === "undefined") return {};
+
   const token = localStorage.getItem("token");
-  return {
-    Authorization: `Bearer ${token}`,
-  };
+  if (!token) return {};
+  return { Authorization: `Bearer ${token}` };
 }
