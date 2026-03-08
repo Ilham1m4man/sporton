@@ -44,17 +44,31 @@ export interface Banks {
   updated_at: string;
 }
 
+export interface TransactionItem {
+  id: string;
+  transaction_id: string;
+  product_id: string;             
+  qty: number;
+  price_at_purchase: string;
+  product: {                       
+    id: string;
+    name: string;
+    description: string;
+    image_url: string;
+    stock: number;
+    price: number;
+    category_id: string;
+  };
+}
+
 export interface Transaction {
   id: string;
   payment_proof: string;
   status: "pending" | "paid" | "rejected";
-  items: {
-    product_id: Product;
-    qty: number;
-  }[];
+  items: TransactionItem[];         
   total_payment: number;
   customer_name: string;
-  customer_contact: number | null;
+  customer_contact: string | null;  
   customer_address: string;
   created_at: string;
   updated_at: string;

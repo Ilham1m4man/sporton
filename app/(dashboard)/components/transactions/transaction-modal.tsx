@@ -90,16 +90,16 @@ export default function TransactionModal({
           <h4 className="font-semibold text-sm mb-2">Items Purchased</h4>
 
           <div className="space-y-3">
-            {transaction.items.map((item, index) => (
+            {transaction.items.map((item) => (
               <div
-                key={index}
+                key={item.id}
                 className="border border-gray-200 rounded-lg p-2 flex items-center gap-2"
               >
-                {item.product_id ? (
+                {item.product ? (
                   <>
                     <div className="bg-gray-100 rounded aspect-square w-10.5 h-10.5">
                       <Image
-                        src={getImageURL(item.product_id.image_url)}
+                        src={getImageURL(item.product.image_url)}
                         width={48}
                         height={48}
                         alt="product image"
@@ -107,7 +107,7 @@ export default function TransactionModal({
                       />
                     </div>
                     <div className="font-medium text-sm">
-                      {item.product_id.name}
+                      {item.product.name}
                     </div>
                     <div className="font-medium ml-auto text-sm">
                       {item.qty} units
@@ -121,7 +121,7 @@ export default function TransactionModal({
                       </div>
                       <div className="flex flex-col">
                         <span className="text-sm font-medium text-dark">
-                          Product ID: null
+                          Product not found
                         </span>
                       </div>
                     </div>
