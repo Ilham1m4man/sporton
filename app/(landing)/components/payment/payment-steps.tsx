@@ -35,17 +35,17 @@ export default function PaymentSteps() {
 
     try {
       const formData = new FormData();
-      formData.append("customerName", customerInfo.customerName);
-      formData.append("customerContact", customerInfo.customerContact!.toString());
-      formData.append("customerAddress", customerInfo.customerAddress);
-      formData.append("image", file);
+      formData.append("customer_name", customerInfo.customerName);
+      formData.append("customer_contact", customerInfo.customerContact!.toString());
+      formData.append("customer_address", customerInfo.customerAddress);
+      formData.append("payment_proof", file);
       formData.append(
-        "purchasedItems",
+        "purchased_items",
         JSON.stringify(
           items.map((item) => ({ productId: item.id, qty: item.qty }))
         )
       );
-      formData.append("totalPayment", totalPrice!.toString());
+      formData.append("total_payment", totalPrice!.toString());
 
       const res = await transactionCheckout(formData);
 
