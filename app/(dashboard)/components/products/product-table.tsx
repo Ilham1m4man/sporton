@@ -33,7 +33,7 @@ export default function ProductTable({products, onEdit, onDelete}: TProductTable
                 <div className="flex gap-2 items-center">
                   <div className="aspect-square bg-gray-100 rounded-md">
                     <Image
-                      src={getImageURL(data.imageUrl)}
+                      src={getImageURL(data.image_url)}
                       width={52}
                       height={52}
                       alt={data.name}
@@ -56,7 +56,7 @@ export default function ProductTable({products, onEdit, onDelete}: TProductTable
                 <button onClick={() => onEdit?.(data)} className="cursor-pointer hover:text-primary">
                   <FiEdit2 size={18} />
                 </button>
-                <button onClick={() => onDelete?.(data._id)} className="cursor-pointer hover:text-primary">
+                <button onClick={() => onDelete?.(data.id)} className="cursor-pointer hover:text-primary">
                   <FiTrash2 size={18} />
                 </button>
               </td>

@@ -28,9 +28,9 @@ export default function CartPopup() {
         items.map((item, index) => (
           <div className="border-b border-gray-200 p-4 flex gap-3" key={index}>
             <div className="bg-primary-light aspect-square w-16 flex justify-center items-center">
-              {item.imageUrl ? (
+              {item.image_url ? (
                 <Image
-                  src={getImageURL(item.imageUrl)}
+                  src={getImageURL(item.image_url)}
                   width={63}
                   height={63}
                   alt={item.name}
@@ -51,7 +51,7 @@ export default function CartPopup() {
               size="small"
               variant="ghost"
               className="w-7 h-7 p-0! self-center ml-auto"
-              onClick={() => removeItem(item._id)}
+              onClick={() => removeItem(item.id)}
             >
               <FiTrash2 />
             </Button>

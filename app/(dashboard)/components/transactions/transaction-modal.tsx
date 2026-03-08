@@ -27,7 +27,7 @@ export default function TransactionModal({
   const handleStatusUpdate = async (status: "paid" | "rejected") => {
     setIsUpdating(true);
     try {
-      await onStatusChange(transaction._id, status);
+      await onStatusChange(transaction.id, status);
     } catch (error) {
       console.error(error);
     } finally {
@@ -40,10 +40,10 @@ export default function TransactionModal({
       <div className="flex gap-6">
         <div className="min-w-50">
           <h4 className="font-semibold text-sm mb-2">Payment Proof</h4>
-          {transaction.paymentProof ? (
+          {transaction.payment_proof ? (
             <div className="bg-gray-100 rounded-xl overflow-hidden shadow-sm relative aspect-[3/5] flex items-center justify-center text-gray-500">
               <Image
-                src={getImageURL(transaction.paymentProof)}
+                src={getImageURL(transaction.payment_proof)}
                 alt="Payment Proof"
                 width={200}
                 height={401}
@@ -62,7 +62,7 @@ export default function TransactionModal({
             <div className="flex justify-between font-medium">
               <div className="opacity-50">Date</div>
               <div className="text-right">
-                {new Date(transaction.createdAt).toLocaleDateString("id-ID", {
+                {new Date(transaction.created_at).toLocaleDateString("id-ID", {
                   day: "numeric",
                   month: "short",
                   year: "numeric",
@@ -73,33 +73,33 @@ export default function TransactionModal({
             </div>
             <div className="flex justify-between font-medium">
               <div className="opacity-50">Customer</div>
-              <div className="text-right">{transaction.customerName}</div>
+              <div className="text-right">{transaction.customer_name}</div>
             </div>
             <div className="flex justify-between font-medium">
               <div className="opacity-50">Contact</div>
-              <div className="text-right">{transaction.customerContact}</div>
+              <div className="text-right">{transaction.customer_contact}</div>
             </div>
             <div className="flex justify-between gap-10 font-medium">
               <div className="opacity-50 whitespace-nowrap">
                 Shipping Address
               </div>
-              <div className="text-right">{transaction.customerAddress}</div>
+              <div className="text-right">{transaction.customer_address}</div>
             </div>
           </div>
 
           <h4 className="font-semibold text-sm mb-2">Items Purchased</h4>
 
           <div className="space-y-3">
-            {transaction.purchasedItems.map((item, index) => (
+            {transaction.purchased_items.map((item, index) => (
               <div
                 key={index}
                 className="border border-gray-200 rounded-lg p-2 flex items-center gap-2"
               >
-                {item.productId ? (
+                {item.product_id ? (
                   <>
                     <div className="bg-gray-100 rounded aspect-square w-10.5 h-10.5">
                       <Image
-                        src={getImageURL(item.productId.imageUrl)}
+                        src={getImageURL(item.product_id.image_url)}
                         width={48}
                         height={48}
                         alt="product image"
@@ -107,7 +107,7 @@ export default function TransactionModal({
                       />
                     </div>
                     <div className="font-medium text-sm">
-                      {item.productId.name}
+                      {item.product_id.name}
                     </div>
                     <div className="font-medium ml-auto text-sm">
                       {item.qty} units
@@ -136,7 +136,7 @@ export default function TransactionModal({
           <div className="flex justify-between  text-sm mt-6">
             <h4 className="font-semibold">Total </h4>
             <div className="text-primary font-semibold">
-              {priceFormatter(transaction.totalPayment)}
+              {priceFormatter(transaction.total_payment)}
             </div>
           </div>
           <div className=" flex justify-end gap-5 mt-12">

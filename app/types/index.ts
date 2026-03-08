@@ -15,48 +15,47 @@ export interface LoginRes {
 }
 
 export interface Category {
-  _id: string;
+  id: string;
   name: string;
   description: string;
-  imageUrl: string;
-  createdAt: string;
-  updatedAt: string;
+  image_url: string;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface Product {
-  _id: string;
+  id: string;
   name: string;
   description: string;
   category: Category;
   stock: number;
   price: number;
-  imageUrl: string;
-  createdAt: string;
-  updatedAt: string;
+  image_url: string;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface Banks {
-  _id: string;
-  bankName: string;
-  accountName: string;
-  accountNumber: string;
-  createdAt: string;
-  updatedAt: string;
+  id: string;
+  bank_name: string;
+  account_name: string;
+  account_number: string;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface Transaction {
-  _id: string;
-  paymentProof: string;
+  id: string;
+  payment_proof: string;
   status: "pending" | "paid" | "rejected";
-  purchasedItems: {
-    map(arg0: (item: any, index: any) => JSX.Element): import("react").ReactNode
-    productId: Product;
+  purchased_items: {
+    product_id: Product;
     qty: number;
-  };
-  totalPayment: number;
-  customerName: string;
-  customerContact: number | null;
-  customerAddress: string;
-  createdAt: string;
-  updatedAt: string;
+  }[];
+  total_payment: number;
+  customer_name: string;
+  customer_contact: number | null;
+  customer_address: string;
+  created_at: string;
+  updated_at: string;
 }

@@ -46,7 +46,7 @@ export default function CategoryModal({
         description: category.description,
       });
       setImagePreview(
-        category.imageUrl ? getImageURL(category.imageUrl) : null,
+        category.image_url ? getImageURL(category.image_url) : null,
       );
     } else if (isOpen) {
       setFormData({
@@ -78,7 +78,7 @@ export default function CategoryModal({
       }
 
       if (isEditMode) {
-        await updateCategory(category._id, data);
+        await updateCategory(category.id, data);
       } else {
         await createCategory(data);
       }

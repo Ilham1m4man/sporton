@@ -10,6 +10,7 @@ type TProductsProps = {
 };
 
 export default function ProductsSection({ products }: TProductsProps) {
+  console.log(products)
   return (
     <section id="products-section" className="container mx-auto py-20">
       <h2 className="font-bold italic text-4xl text-center mb-11">
@@ -18,14 +19,14 @@ export default function ProductsSection({ products }: TProductsProps) {
       <div className="grid grid-cols-4 gap-5">
         {products.map((product) => (
           <Link
-            href={`/product/${product._id}`}
-            key={product._id}
+            href={`/product/${product.id}`}
+            key={product.id}
             className="p-1.5 bg-white hover:drop-shadow-xl duration-300"
           >
             <div className="bg-primary-light aspect-square w-full flex justify-center items-center relative">
-              {product.imageUrl ? (
+              {product.image_url ? (
                 <Image
-                  src={getImageURL(product.imageUrl)}
+                  src={getImageURL(product.image_url)}
                   alt={product.name}
                   width={300}
                   height={300}

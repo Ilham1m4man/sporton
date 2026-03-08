@@ -34,7 +34,7 @@ export default function CategoryTable({
                 <div className="flex gap-4 items-center">
                   <div className="aspect-square overflow-hidden bg-gray-100 rounded-md">
                     <Image
-                      src={getImageURL(data.imageUrl)}
+                      src={getImageURL(data.image_url)}
                       width={48}
                       height={48}
                       alt={data.name}
@@ -53,7 +53,7 @@ export default function CategoryTable({
                   <FiEdit2 size={18} />
                 </button>
                 <button
-                  onClick={() => onDelete?.(data._id)}
+                  onClick={() => onDelete?.(data.id)}
                   className="cursor-pointer hover:text-primary"
                 >
                   <FiTrash2 size={18} />

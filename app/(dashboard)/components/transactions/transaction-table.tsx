@@ -38,20 +38,20 @@ export default function TransactionTable({
         <tbody>
           {transactions.map((data, index) => (
             <tr
-              key={data._id}
+              key={data.id}
               className="border-b text-sm border-gray-50 last:border-none hover:bg-gray-50/50"
             >
-              <td className="px-6 py-4 font-medium">{new Date(data.createdAt).toLocaleDateString("id-ID", {
+              <td className="px-6 py-4 font-medium">{new Date(data.created_at).toLocaleDateString("id-ID", {
                   day: "numeric",
                   month: "short",
                   year: "numeric",
                   hour: "2-digit",
                   minute: "2-digit",
                 })}</td>
-              <td className="px-6 py-4 font-medium">{data.customerName}</td>
-              <td className="px-6 py-4 font-medium">{data.customerContact}</td>
+              <td className="px-6 py-4 font-medium">{data.customer_name}</td>
+              <td className="px-6 py-4 font-medium">{data.customer_contact}</td>
               <td className="px-6 py-4 font-medium">
-                {priceFormatter(data.totalPayment)}
+                {priceFormatter(data.total_payment)}
               </td>
 
               <td className="px-6 py-4 font-bold">

@@ -19,7 +19,7 @@ type ProductFormData = {
   name: string;
   price: number;
   stock: number;
-  categoryId: string;
+  category_id: string;
   description: string;
 }
 
@@ -33,7 +33,7 @@ export default function ProductModal({ product, isOpen, onClose, onSuccess }: TP
     name: "",
     price: 0,
     stock: 0,
-    categoryId: "",
+    category_id: "",
     description: "",
   });
 
@@ -65,14 +65,14 @@ export default function ProductModal({ product, isOpen, onClose, onSuccess }: TP
       data.append("name", formData.name);
       data.append("price", formData.price.toString());
       data.append("stock", formData.stock.toString());
-      data.append("categoryId", formData.categoryId);
+      data.append("category_id", formData.category_id);
       data.append("description", formData.description);
       if (imageFile) {
         data.append("image", imageFile);
       }
 
       if (isEditMode) {
-        await updateProduct(product._id, data);
+        await updateProduct(product.id, data);
       } else {
         await createProduct(data);
       }
@@ -82,7 +82,7 @@ export default function ProductModal({ product, isOpen, onClose, onSuccess }: TP
         name: "",
         price: 0,
         stock: 0,
-        categoryId: "",
+        category_id: "",
         description: "",
       });
       setImageFile(null);
@@ -115,16 +115,16 @@ export default function ProductModal({ product, isOpen, onClose, onSuccess }: TP
         name: product.name,
         description: product.description,
         price: product.price,
-        categoryId: product.category._id,
+        category_id: product.category.id,
         stock: product.stock,
       });
-      setImagePreview(product.imageUrl ? getImageURL(product.imageUrl) : null);
+      setImagePreview(product.image_url ? getImageURL(product.image_url) : null);
     } else if (isOpen) {
       setFormData({
         name: "",
         price: 0,
         stock: 0,
-        categoryId: "",
+        category_id: "",
         description: "",
       });
       setImageFile(null);
@@ -193,16 +193,16 @@ export default function ProductModal({ product, isOpen, onClose, onSuccess }: TP
             <div className="input-group-admin">
               <label htmlFor="category">Category</label>
               <select
-                name="categoryId"
-                id="categoryId"
-                value={formData.categoryId}
+                name="category_id"
+                id="category_id"
+                value={formData.category_id}
                 onChange={handleChange}
               >
                 <option value="" disabled>
                   Select Category
                 </option>
                 {categories.map((category) => (
-                  <option value={category._id} key={category._id}>
+                  <option value={category.id} key={category.id}>
                     {category.name}
                   </option>
                 ))}

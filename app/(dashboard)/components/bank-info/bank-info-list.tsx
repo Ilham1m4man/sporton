@@ -17,7 +17,7 @@ export default function BankInfoList({
       {banks.map((data) => (
         <div
           className="bg-white rounded-xl border border-gray-100 p-6 shadow-sm hover:shadow-md transition-shadow"
-          key={data._id}
+          key={data.id}
         >
           <div className="flex justify-between items-start mb-6">
             <div className="flex gap-4 items-center">
@@ -25,7 +25,7 @@ export default function BankInfoList({
                 <FiCreditCard size={24} />
               </div>
               <div>
-                <div className="font-bold text-lg">{data.bankName}</div>
+                <div className="font-bold text-lg">{data.bank_name}</div>
                 <div className="text-gray-400 text-sm">Bank Transfer</div>
               </div>
             </div>
@@ -38,7 +38,7 @@ export default function BankInfoList({
               </button>
               <button
                 className="cursor-pointer hover:text-red-500 transition-colors"
-                onClick={() => onDelete(data._id)}
+                onClick={() => onDelete(data.id)}
               >
                 <FiTrash2 size={18} />
               </button>
@@ -49,13 +49,13 @@ export default function BankInfoList({
               ACCOUNT NUMBER
             </div>
             <div className="text-dark font-bold text-lg">
-              {data.accountNumber}
+              {data.account_number}
             </div>
           </div>
           <div className="pt-4 border-t border-gray-50">
             <p className="text-xs text-gray-400">
               Holder :{" "}
-              <span className="font-medium text-dark">{data.accountName}</span>
+              <span className="font-medium text-dark">{data.account_name}</span>
             </p>
           </div>
         </div>

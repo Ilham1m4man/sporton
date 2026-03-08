@@ -42,7 +42,7 @@ export default function PaymentSteps() {
       formData.append(
         "purchasedItems",
         JSON.stringify(
-          items.map((item) => ({ productId: item._id, qty: item.qty }))
+          items.map((item) => ({ productId: item.id, qty: item.qty }))
         )
       );
       formData.append("totalPayment", totalPrice!.toString());
@@ -51,7 +51,7 @@ export default function PaymentSteps() {
 
       toast.success("Transaction created successfully!");
       reset();
-      push(`/order-status/${res._id}`);
+      push(`/order-status/${res.id}`);
     } catch (e) {
       console.log(e);
     }

@@ -20,9 +20,9 @@ export default function BankInfoModal({
 }: TBankInfoModalProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState<Partial<Banks>>({
-    accountName: "",
-    accountNumber: "",
-    bankName: "",
+    account_name: "",
+    account_number: "",
+    bank_name: "",
   });
 
   const isEditMode = !!bank;
@@ -41,15 +41,15 @@ export default function BankInfoModal({
     setIsSubmitting(true);
     try {
       if (isEditMode) {
-        await updateBank(bank._id, formData);
+        await updateBank(bank.id, formData);
       } else {
         await createBank(formData);
       }
 
       setFormData({
-        accountName: "",
-        accountNumber: "",
-        bankName: "",
+        account_name: "",
+        account_number: "",
+        bank_name: "",
       });
       onSuccess?.();
       onClose();
@@ -78,15 +78,15 @@ export default function BankInfoModal({
   useEffect(() => {
     if (isEditMode && isOpen) {
       setFormData({
-        accountName: bank.accountName,
-        accountNumber: bank.accountNumber,
-        bankName: bank.bankName,
+        account_name: bank.account_name,
+        account_number: bank.account_number,
+        bank_name: bank.bank_name,
       });
     } else if (isOpen) {
       setFormData({
-        accountName: "",
-        accountNumber: "",
-        bankName: "",
+        account_name: "",
+        account_number: "",
+        bank_name: "",
       });
     }
   }, [bank, isOpen]);
@@ -96,35 +96,35 @@ export default function BankInfoModal({
       <form onSubmit={handleSubmit} className="flex flex-col gap-6">
         <div className="flex flex-col gap-4 w-full">
           <div className="input-group-admin">
-            <label htmlFor="bankName">Bank Name</label>
+            <label htmlFor="bank_name">Bank Name</label>
             <input
               type="text"
-              id="bankName"
-              name="bankName"
+              id="bank_name"
+              name="bank_name"
               placeholder="e. g. Mandiri, BCA, BRI"
-              value={formData.bankName}
+              value={formData.bank_name}
               onChange={handleChange}
             />
           </div>
           <div className="input-group-admin">
-            <label htmlFor="accountNumber">Account Number</label>
+            <label htmlFor="account_number">Account Number</label>
             <input
               type="text"
-              id="accountNumber"
-              name="accountNumber"
+              id="account_number"
+              name="account_number"
               placeholder="123124344234234"
-              value={formData.accountNumber}
+              value={formData.account_number}
               onChange={handleChange}
             />
           </div>
           <div className="input-group-admin">
-            <label htmlFor="accountName">Account Name / Holder</label>
+            <label htmlFor="account_name">Account Name / Holder</label>
             <input
               type="text"
-              id="accountName"
-              name="accountName"
+              id="account_name"
+              name="account_name"
               placeholder="Holder Name as registered on the account"
-              value={formData.accountName}
+              value={formData.account_name}
               onChange={handleChange}
             />
           </div>

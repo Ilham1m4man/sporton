@@ -9,6 +9,7 @@ type TCategoriesProps = {
 };
 
 export default function CategoriesSection({ categories }: TCategoriesProps) {
+  console.log(categories)
   return (
     <section id="category-section" className="container mx-auto py-20">
       <div className="flex justify-between">
@@ -22,12 +23,12 @@ export default function CategoriesSection({ categories }: TCategoriesProps) {
         {categories.map((category) => (
           <div
             className="rounded-lg bg-gradient-to-r from-[#F1F1F1] to-[#F7F7F7] w-full aspect-square flex justify-center"
-            key={category._id}
+            key={category.id}
           >
             <div className="self-center">
-              {category.imageUrl ? (
+              {category.image_url ? (
                 <Image
-                  src={getImageURL(category.imageUrl)}
+                  src={getImageURL(category.image_url)}
                   width={86}
                   height={86}
                   alt={category.name}

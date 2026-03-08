@@ -28,11 +28,11 @@ export default function CartItems({handlePayment}: TCartItems) {
         {items.map((item, index) => (
           <div
             className="border-b border-gray-200 p-4 flex gap-3"
-            key={item._id}
+            key={item.id}
           >
             <div className="bg-primary-light aspect-square w-16 flex justify-center items-center">
               <Image
-                src={getImageURL(item.imageUrl)}
+                src={getImageURL(item.image_url)}
                 width={63}
                 height={63}
                 alt={item.name}
@@ -50,7 +50,7 @@ export default function CartItems({handlePayment}: TCartItems) {
               size="small"
               variant="ghost"
               className="w-7 h-7 p-0! self-center ml-auto"
-              onClick={() => removeItem(item._id)}
+              onClick={() => removeItem(item.id)}
             >
               <FiTrash2 />
             </Button>
