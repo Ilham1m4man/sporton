@@ -14,7 +14,7 @@ export async function fetchAPI<T>(
   } else {
     // Browser → relative URL → middleware proxy ke Internal ALB
     // Contoh: "/api/v1/users" (tanpa host)
-    url = endpoint;
+    url = `/api${endpoint}`;
   }
 
   const res = await fetch(url, {
