@@ -38,7 +38,7 @@ export default function PaymentSteps() {
       formData.append("customer_name", customerInfo.customerName);
       formData.append("customer_contact", customerInfo.customerContact!.toString());
       formData.append("customer_address", customerInfo.customerAddress);
-      formData.append("payment_proof", file);
+      formData.append("image", file);
       formData.append(
         "purchased_items",
         JSON.stringify(
